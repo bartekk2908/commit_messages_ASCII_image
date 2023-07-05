@@ -22,16 +22,17 @@ class Board:
     def get_value(self, index):
         return self.board[index[0]][index[1]]
 
-    def handle_click(self, index, white, black):
+    def handle_click(self, index, black, white):
         if white:
             self.board[index[0]][index[1]] = 1
         if black:
             self.board[index[0]][index[1]] = 0
 
     def save_board(self):
-        with open("ascii_art.txt", "w") as file:
-            for i in range(self.size[1]):
-                file.write("".join(list(map(str, self.board[i]))) + "\n")
+        with open("ascii_art.txt", "w", encoding="utf-8") as file:
+            for i in range(self.size[0]):
+                line = "".join(list(map(str, self.board[i]))) + "\n"
+                file.write(line.replace("0", chr(9608)).replace("1", chr(9617)))
 
 
 class Interface:
@@ -51,7 +52,9 @@ class Interface:
                 if pg.mouse.get_pressed()[0] or pg.mouse.get_pressed()[2]:
                     position = pg.mouse.get_pos()
                     left_click, middle_click, right_click = pg.mouse.get_pressed(3)
-                    self.handle_click(self.get_index_of_position(position), left_click, right_click)
+                    index = self.get_index_of_position(position)
+                    if index:
+                        self.handle_click(index, left_click, right_click)
             self.draw()
             pg.display.flip()
         self.board.save_board()
@@ -67,6 +70,8 @@ class Interface:
             top_left = 0, top_left[1] + self.piece_size[1]
 
     def get_index_of_position(self, position):
+        if position[1] >= self.screen_size[1] or position[1] < 0 or position[0] >= self.screen_size[0] or position[0] < 0:
+            return None
         return position[1] // self.piece_size[1], position[0] // self.piece_size[0]
 
     def handle_click(self, index, left_click, right_click):
@@ -74,5 +79,5 @@ class Interface:
 
 
 if __name__ == "__main__":
-    window = Interface(Board((10, 10)), (700, 500))
+    window = Interface(Board((10, 30)), (540, 600))     # TODO: assert correct size of board and adjust window size
     window.run()

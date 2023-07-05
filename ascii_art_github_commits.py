@@ -59,6 +59,14 @@ def create_aa_commits_messages(ascii_art, repo_url):
 
     repo = git.Repo(repo_name)
 
+    # Checking if there was at least one commit
+    try:
+        repo.commit()
+    except ValueError:
+        open(repo_name + "a", 'a').close()
+        repo.index.add("a")
+        repo.git.commit('--allow-empty-message', '-m', '')
+
     # Getting list of directories and files
     folders = []
     for folder in repo.commit().tree.trees:
@@ -109,11 +117,11 @@ def create_aa_commits_messages(ascii_art, repo_url):
 
 if __name__ == "__main__":
 
-    with open("ascii_art.txt", "r") as file:
+    with open("ascii_art.txt", "r", encoding="utf-8") as file:
         art = file.read()
     print("Given ASCII art: ")
     print(art)
 
-    url = "https://github.com/bartekk2908/commit_messages_ASCII_art.git"
+    url = "https://github.com/bartekk2908/test_repo.git"
 
     create_aa_commits_messages(art, url)
