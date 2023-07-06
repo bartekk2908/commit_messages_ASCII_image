@@ -70,14 +70,15 @@ class Interface:
             top_left = 0, top_left[1] + self.piece_size[1]
 
     def get_index_of_position(self, position):
-        if position[1] >= self.screen_size[1] or position[1] < 0 or position[0] >= self.screen_size[0] or position[0] < 0:
+        index = position[1] // self.piece_size[1], position[0] // self.piece_size[0]
+        if index[1] >= self.board.get_size()[1] or index[1] < 0 or index[0] >= self.board.get_size()[0] or index[0] < 0:
             return None
-        return position[1] // self.piece_size[1], position[0] // self.piece_size[0]
+        return index
 
     def handle_click(self, index, left_click, right_click):
         self.board.handle_click(index, left_click, right_click)
 
 
 if __name__ == "__main__":
-    window = Interface(Board((10, 30)), (540, 600))     # TODO: assert correct size of board and adjust window size
+    window = Interface(Board((20, 46)), (600, 600))     # max board width: 46
     window.run()
