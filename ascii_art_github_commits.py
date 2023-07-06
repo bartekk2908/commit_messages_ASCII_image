@@ -6,17 +6,20 @@ repo_name = "temporary_repo\\"
 
 
 def get_ascii_addition(char):
+    """Function takes character and returns number needed to add to ascii number of character to get next ascii character
+    that is number 0-9 or letter A-Z or a-z."""
+
     addition = 1
     if char == "." or char == "_":
         addition = 2
     elif char == "9":
-        addition = 8
-    elif char == "Z":
-        addition = 7
+        addition = 40
     return addition
 
 
 def next_string_in_order(string):
+    """Function takes string and returns new string that its last character is next ascii character."""
+
     string = list(string)
 
     addition = get_ascii_addition(string[-1])
@@ -29,6 +32,9 @@ def next_string_in_order(string):
 
 
 def new_string_in_order(string):
+    """Function takes string and returns new string that its first character is next character in alphabetical order
+    and second character is '0'."""
+
     index = 1
     while True:
         new_string = list(string[:index])
@@ -48,7 +54,7 @@ def new_string_in_order(string):
     return "".join(new_string)
 
 
-def create_aa_commits_messages(ascii_art, repo_url):
+def create_aa_commits_messages(ascii_art: str, repo_url: str):
 
     # Deleting temporary repository
     if os.path.exists(repo_name):
@@ -108,11 +114,9 @@ def create_aa_commits_messages(ascii_art, repo_url):
     origin = repo.remote(name='origin')
     origin.push()
 
-    """
     # Deleting temporary repository
     if os.path.exists(repo_name):
         git.rmtree(repo_name)
-    """
 
 
 if __name__ == "__main__":

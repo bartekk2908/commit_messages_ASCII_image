@@ -3,6 +3,12 @@ environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame as pg
 
 
+BLACK = chr(9608)   # █
+D_GREY = chr(9619)  # ▓
+L_GREY = chr(9618)  # ▒
+WHITE = chr(9617)   # ░
+
+
 class Board:
     def __init__(self, size):
         self.size = size
@@ -32,14 +38,14 @@ class Board:
         with open("ascii_art.txt", "w", encoding="utf-8") as file:
             for i in range(self.size[0]):
                 line = "".join(list(map(str, self.board[i]))) + "\n"
-                file.write(line.replace("0", chr(9608)).replace("1", chr(9617)))
+                file.write(line.replace("0", BLACK).replace("1", WHITE))
 
 
 class Interface:
     def __init__(self, board, screen_size):
         self.board = board
-        self.screen_size = screen_size
-        self.piece_size = self.screen_size[0] // self.board.get_size()[1], self.screen_size[1] // self.board.get_size()[0]
+        self.piece_size = screen_size[0] // self.board.get_size()[1], screen_size[1] // self.board.get_size()[0]
+        self.screen_size = (self.piece_size[0] * self.board.get_size()[1], self.piece_size[1] * self.board.get_size()[0])
 
     def run(self):
         pg.init()
@@ -80,5 +86,5 @@ class Interface:
 
 
 if __name__ == "__main__":
-    window = Interface(Board((20, 46)), (600, 600))     # max board width: 46
+    window = Interface(Board((20, 46)), (600, 610))     # max board width: 46
     window.run()
