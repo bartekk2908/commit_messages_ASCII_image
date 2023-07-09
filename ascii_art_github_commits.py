@@ -6,8 +6,8 @@ repo_name = "temporary_repo\\"
 
 
 def get_ascii_addition(char):
-    """Function takes character and returns number needed to add to ascii number of character to get next ascii character
-    that is number 0-9 or letter A-Z or a-z."""
+    """Function takes character and returns number needed to add to ascii number to get next ascii character
+    that is number 0-9 or letter a-z."""
 
     addition = 1
     if char == "." or char == "_":
@@ -18,7 +18,7 @@ def get_ascii_addition(char):
 
 
 def next_string_in_order(string):
-    """Function takes string and returns new string that its last character is next ascii character."""
+    """Function takes string and returns new string that its last character is next ascii character in alphabetical order."""
 
     string = list(string)
 
@@ -32,7 +32,7 @@ def next_string_in_order(string):
 
 
 def new_string_in_order(string):
-    """Function takes string and returns new string that its first character is next character in alphabetical order
+    """Function takes string and returns new string that its first character is next ascii character in alphabetical order
     and second character is '0'."""
 
     index = 1
@@ -54,9 +54,9 @@ def new_string_in_order(string):
     return "".join(new_string)
 
 
-def create_aa_commits_messages(ascii_art: str, repo_url: str):
+def create_aa_commits_messages(ascii_art, repo_url):
 
-    # Deleting temporary repository
+    # Deleting temporary repository if exists
     if os.path.exists(repo_name):
         git.rmtree(repo_name)
 
@@ -69,9 +69,7 @@ def create_aa_commits_messages(ascii_art: str, repo_url: str):
     try:
         repo.commit()
     except ValueError:
-        open(repo_name + "a", 'a').close()
-        repo.index.add("a")
-        repo.git.commit('--allow-empty-message', '-m', '')
+        repo.git.commit('--allow-empty-message', '--allow-empty', '-m', '')
 
     # Getting list of directories and files
     folders = []
@@ -115,13 +113,16 @@ def create_aa_commits_messages(ascii_art: str, repo_url: str):
     origin.push()
 
     # Deleting temporary repository
+    repo.git.clear_cache()
     if os.path.exists(repo_name):
         git.rmtree(repo_name)
 
 
 if __name__ == "__main__":
 
-    with open("ascii_art.txt", "r", encoding="utf-8") as file:
+    aa_file = "ascii_art.txt"
+
+    with open(aa_file, "r", encoding="utf-8") as file:
         art = file.read()
     print("Given ASCII art: ")
     print(art)

@@ -4,8 +4,6 @@ import pygame as pg
 
 
 BLACK = chr(9608)   # █
-D_GREY = chr(9619)  # ▓
-L_GREY = chr(9618)  # ▒
 WHITE = chr(9617)   # ░
 
 
