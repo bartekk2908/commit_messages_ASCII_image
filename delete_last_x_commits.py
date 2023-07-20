@@ -39,6 +39,6 @@ def delete_last_commits(repo_url, n):
 if __name__ == "__main__":
 
     url = "https://github.com/bartekk2908/test_repo.git"
-    x = 47
+    x = 21
 
     delete_last_commits(url, x)

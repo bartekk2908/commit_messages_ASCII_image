@@ -84,5 +84,5 @@ class Interface:
 
 
 if __name__ == "__main__":
-    window = Interface(Board((20, 46)), (600, 610))     # max board width: 46
+    window = Interface(Board((20, 46)), (600, 600))     # max board width (second number): 46
     window.run()
