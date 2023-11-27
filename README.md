@@ -42,20 +42,20 @@ To use it you have to install packages from `requirements.txt` file.
 According to what I mentioned earlier, I recommend you to create new ascii art with my scripts and don't use ascii arts gotten from somewhere else.
 
 You can use `make_ascii_art.py` to draw your simple ascii art by yourself.\
-You only have to specify size of ascii art and size of window for drawing.\
+You just have to specify size of ascii art and size of window for drawing.\
 Click `LMB` to draw black and `RMB` to drwa white.\
 The result will be saved in `ascii_art.txt` file.\
 The ascii art created this way is composed of only __two__ different characters. 
 
 You can use `convert_image_to_ascii_art.py` to convert given image to ascii art.\
-You only have to specify width of ascii art and path to the image.\
+You just have to specify width of ascii art and path to the image.\
 The result will be saved in `ascii_art.txt` file.\
 The ascii art created this way is composed of __four__ different characters. 
 
 ### Upload ascii art to GitHub repo
 
 Use `ascii_art_github_commits.py` to push fake commits that contain lines of ascii art from `ascii_art.txt` to remote repo.\
-You only have to specify the url adres of your repo.
+You only have to specify the url adres of your repo. You can use url adress of existing repo that already contains files or completely fresh repo without any files.
 
 ### Remove ascii art from GitHub repo
 
